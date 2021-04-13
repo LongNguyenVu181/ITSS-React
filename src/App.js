@@ -2,16 +2,11 @@ import React, { useState} from 'react'
 import AddUserForm from './form/AddUserForm'
 import UpdateUser from './form/UpdateUser'
 import UserTable from './table/UsersTable'
+import useStorage from "./hook/storage";
 
 const App = () => {
-	const usersData = [
-		{ id: 1, name: 'Tania', username: 'floppydiskette' },
-		{ id: 2, name: 'Craig', username: 'siliconeidolon' },
-		{ id: 3, name: 'Ben', username: 'benisphere' },
-	];
 	const initialFormState = { id: null, name: '', username: '' };
-
-	const [ users, setUsers ] = useState(usersData);
+	const [ users, setUsers ] = useStorage();
 	const [ currentUser, setCurrentUser ] = useState(initialFormState);
 	const [ editing, setEditing ] = useState(false);
 	const addUser = user => {
