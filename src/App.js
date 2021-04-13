@@ -1,23 +1,51 @@
-import logo from './logo.svg';
+
 import './App.css';
 
+import React, { useState, Fragment } from 'react'
+import UpdateForm from './form/UpdateUser'
 function App() {
+  const usersData = [
+    { id: 1, name: 'quanle', username: 'duyngadocton' },
+	]
+
+	const initialFormState = { id: null, name: '', username: '' }
+  const [ editing, setEditing ] = useState(true)
+  const [ users, setUsers ] = useState(usersData)
+	const [ currentUser, setCurrentUser ] = useState(users[0])
+  
+  const updateUser = (id, updatedUser) => {
+		setEditing(false)
+
+		setUsers(users.map(user => (user.id === id ? updatedUser : user)))
+	}
+	
+	
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     
+      <div className="content">
+        {editing ? 
+          <div className="Edit-form">
+            <h2>Edit user form</h2>
+            <UpdateForm
+              editing={editing}
+              setEditing ={setEditing}
+              currentUser={currentUser}
+              updateUser={updateUser}
+            />
+          </div>
+          :
+          <div className="Edit-form">
+            <h2>Edit user form</h2>
+            <UpdateForm
+              editing={editing}
+              setEditing ={setEditing}
+              currentUser={currentUser}
+              updateUser={updateUser}
+            />
+          </div>
+        }
+      </div>
     </div>
   );
 }
